@@ -1,0 +1,6 @@
+{
+  "name": "Awesome Movie App",
+  "identifier": "com.domain.app.AwesomeMovieApp",
+  "version": "1.0.0",
+  "icon": "./static/icon.png"
+}
