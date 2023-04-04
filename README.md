@@ -1,4 +1,19 @@
-# Awesome Movie App
+# Awesome Movie App (Lightning.JS assessment)
+
+**Add your TMDB API KEY to the settings.json file!**
+
+This assessment lacks the following:
+- full search implementation
+- mark movies as favorites and browse them
+
+Home page:
+- left/right
+- key down: focus search
+
+Detail apge:
+- key down/up: focus between nothing, button and similar movies
+
+I invested about 8h of time into this.
 
 ## com.domain.app.AwesomeMovieApp
 

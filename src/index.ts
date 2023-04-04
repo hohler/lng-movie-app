@@ -1,10 +1,10 @@
-import { Lightning, Launch, PlatformSettings, AppData } from '@lightningjs/sdk'
-import { App } from './App.js'
+import { AppData, Launch, Lightning, PlatformSettings } from '@lightningjs/sdk';
+import { App } from './App.js';
 
-export default function (
+export default function(
   appSettings: Lightning.Application.Options,
   platformSettings: PlatformSettings,
   appData: AppData,
 ) {
-  return Launch(App, appSettings, platformSettings, appData)
+  return Launch(App, appSettings, platformSettings, appData);
 }
