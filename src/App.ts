@@ -21,12 +21,11 @@ import { Button } from './components/Button';
 
 interface AppTemplateSpec extends Lightning.Component.TemplateSpec {
   Background: {
+    Button: typeof Button;
   };
 }
 
-export class App
-  extends Lightning.Component<AppTemplateSpec>
-  implements Lightning.Component.ImplementTemplateSpec<AppTemplateSpec> {
+export class App extends Lightning.Component<AppTemplateSpec> implements Lightning.Component.ImplementTemplateSpec<AppTemplateSpec> {
   /*
    * The following properties exist to make it more convenient to access elements
    * below in a type-safe way. They are optional.
@@ -35,6 +34,7 @@ export class App
    * for more information.
    */
   readonly Background = this.getByRef('Background')!;
+  readonly Button = this.Background.getByRef('Button')!;
 
   static override _template(): Lightning.Component.Template<AppTemplateSpec> {
     return {
@@ -45,6 +45,12 @@ export class App
         h: 1080,
         rect: true,
         color: 0xff1e012c,
+        Button: {
+          x: 760,
+          y: 550,
+          type: Button,
+          label: 'Click me',
+        },
       },
     };
   }
@@ -58,12 +64,11 @@ export class App
     ];
   }
 
-
-  override _handleEnter() {
-
+  override _getFocused() {
+    return this.Button;
   }
 
-  override _init() {
+  override _handleEnter() {}
 
-  }
+  override _init() {}
 }
