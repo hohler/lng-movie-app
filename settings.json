@@ -4,12 +4,13 @@
       "clearColor": "0x00000000",
       "useImageWorker": true
     },
-    "debug": true
+    "debug": true,
+    "tmdbApiKey": "1866b0a16a7075db575aacb4c20703e3"
   },
   "platformSettings": {
     "path": "./static",
     "log": true,
-    "showVersion": true,
+    "showVersion": false,
     "inspector": true
   }
 }

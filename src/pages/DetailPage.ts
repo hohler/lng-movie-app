@@ -25,7 +25,11 @@ interface DetailPageTemplateSpec extends Lightning.Component.TemplateSpec {
   };
 }
 
-export class DetailPage extends Lightning.Component<DetailPageTemplateSpec> implements Lightning.Component.ImplementTemplateSpec<DetailPageTemplateSpec> {
+interface DetailPageTypeConfig extends Lightning.Component.TypeConfig {
+  isPage: true;
+}
+
+export class DetailPage extends Lightning.Component<DetailPageTemplateSpec, DetailPageTypeConfig> implements Lightning.Component.ImplementTemplateSpec<DetailPageTemplateSpec> {
   readonly Background = this.getByRef('Background')!;
   readonly Similar = this.getByRef('Similar')!;
   readonly Results = this.Similar.getByRef('Results')!;
@@ -292,26 +296,15 @@ export class DetailPage extends Lightning.Component<DetailPageTemplateSpec> impl
     };
   }
 
-  // override _handleRight() {
-  //   if (this.index >= this.Results.children.length - 1) {
-  //     return;
-  //   }
-  //   this.index++;
-  // }
-
-  // override _handleLeft() {
-  //   if (this.index <= 0) {
-  //     return;
-  //   }
-  //   this.index--;
-  // }
-
   override pageTransition(pageIn: Router.PageInstance, pageOut: Router.PageInstance | null): Router.PageTransition | Promise<void> {
     return 'fade';
   }
 
-  override set params(data: Movie) {
-    this.dataId = data.id;
+  override _onUrlParams(params: { id: string }) {
+    this.buttonsFocused = false;
+    this.similarFocused = false;
+
+    this.dataId = Number(params.id);
     this.loadData();
   }
 }

@@ -14,7 +14,11 @@ interface HomePageTemplateSpec extends Lightning.Component.TemplateSpec {
   Search: typeof Input;
 }
 
-export class HomePage extends Lightning.Component<HomePageTemplateSpec> implements Lightning.Component.ImplementTemplateSpec<HomePageTemplateSpec> {
+interface HomePageTypeConfig extends Lightning.Component.TypeConfig {
+  isPage: true;
+}
+
+export class HomePage extends Lightning.Component<HomePageTemplateSpec, HomePageTypeConfig> implements Lightning.Component.ImplementTemplateSpec<HomePageTemplateSpec> {
   readonly Background = this.getByRef('Background')!;
   readonly Container = this.getByRef('Container')!;
   readonly Results = this.Container.getByRef('Results')!;
@@ -72,12 +76,7 @@ export class HomePage extends Lightning.Component<HomePageTemplateSpec> implemen
   override _focusChange(newFocusedComponent: Lightning.Component | undefined, prevFocusedComponent: Lightning.Component | undefined) {
     super._focusChange(newFocusedComponent, prevFocusedComponent);
 
-    const path = (this.Results.selected as any)?.data.backdrop_path;
-    this.Background!.patch({
-      smooth: {
-        src: `https://image.tmdb.org/t/p/original${path}`,
-      },
-    });
+    this.setCurrentBackground();
   }
 
   override async _setup() {
@@ -87,6 +86,7 @@ export class HomePage extends Lightning.Component<HomePageTemplateSpec> implemen
     const data = trending.map(this.getMovieTemplate);
 
     this.Results.items = data;
+    this.setCurrentBackground();
   }
 
   override _handleDown() {
@@ -131,10 +131,13 @@ export class HomePage extends Lightning.Component<HomePageTemplateSpec> implemen
     return true;
   }
 
-  override _handleEnter() {
-    if (this.searchFocused) {
-      // TODO search
-    }
+  private setCurrentBackground() {
+    const path = (this.Results.selected as any)?.data.backdrop_path;
+    this.Background!.patch({
+      smooth: {
+        src: `https://image.tmdb.org/t/p/original${path}`,
+      },
+    });
   }
 
   // TODO: this breaks the app?!

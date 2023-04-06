@@ -4,7 +4,11 @@ interface BootPageTemplateSpec extends Lightning.Component.TemplateSpec {
   //
 }
 
-export class BootPage extends Lightning.Component<BootPageTemplateSpec> implements Lightning.Component.ImplementTemplateSpec<BootPageTemplateSpec> {
+interface BootPageTypeConfig extends Lightning.Component.TypeConfig {
+  isPage: true;
+}
+
+export class BootPage extends Lightning.Component<BootPageTemplateSpec, BootPageTypeConfig> implements Lightning.Component.ImplementTemplateSpec<BootPageTemplateSpec> {
   static override _template(): Lightning.Component.Template<BootPageTemplateSpec> {
     return {
       //
@@ -15,7 +19,11 @@ export class BootPage extends Lightning.Component<BootPageTemplateSpec> implemen
     return 'fade';
   }
 
-  override async _init() {
-    Router.navigate('home');
+  override _handleBack() {
+    //
+  }
+
+  override _enable() {
+    Router.resume();
   }
 }
